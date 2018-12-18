@@ -71,20 +71,23 @@ void ofApp::setup() {
 	whippen.setPhysics(5.0f, 0.5f, 0.5f);
 	whippen.setup(box2d.getWorld(), 145, 525, 190, 50);
 
-	whippenToJack.setPhysics(1.0, 0.5, 0.5);
+	whippenToJack.setPhysics(1.0f, 0.5f, 0.5f);
 	whippenToJack.setup(box2d.getWorld(), 152, 492, 13, 44);
 
-	catcher.setPhysics(1.0, 0.5, 0.5);
+	catcher.setPhysics(1.0f, 0.5f, 0.5f);
 	catcher.setup(box2d.getWorld(), 200, 315, 80, 15);
 	catcher.setRotation(15);
 
 
-	hammerBody.setPhysics(1.0, 0.5, 0.5);
+	hammerBody.setPhysics(1.0f, 0.5f, 0.5f);
 	hammerBody.setup(box2d.getWorld(), 165, 175, 10, 210);
 	hammerBody.setRotation(18);
 
-	cucha.setPhysics(1.0, 0.5, 0.5);
+	cucha.setPhysics(1.0f, 0.5f, 0.5f);
 	cucha.setup(box2d.getWorld(), 60, 485, 5, 40);
+
+	dumperBody.setPhysics(1.0f, 0.5f, 0.5f);
+	dumperBody.setup(box2d.getWorld(), 55, 365, 16, 235);
 
 	//Joints
 	b2RevoluteJointDef leftWDef;
@@ -98,6 +101,10 @@ void ofApp::setup() {
 	b2RevoluteJointDef toHammerButtDef;
 	toHammerButtDef.Initialize(hammerSupport.body, hammerButt.body, hammerSupport.body->GetWorldCenter());
 	toHammerButt = (b2RevoluteJoint*)box2d.getWorld()->CreateJoint(&toHammerButtDef);
+
+	b2RevoluteJointDef toDumperBodyDef;
+	toDumperBodyDef.Initialize(dumperSupport.body, dumperBody.body, dumperSupport.body->GetWorldCenter() + b2Vec2(-0.2, 0));
+	toDumperBody = (b2RevoluteJoint*)box2d.getWorld()->CreateJoint(&toDumperBodyDef);
 
 	b2WeldJointDef whToDef;
 	whToDef.collideConnected = false;
@@ -161,6 +168,7 @@ void ofApp::draw() {
 	hammerBody.draw();
 	catcher.draw();
 	cucha.draw();
+	dumperBody.draw();
 
 	//Static draws
 	base.draw();
