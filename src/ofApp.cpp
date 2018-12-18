@@ -35,39 +35,38 @@ void ofApp::setup() {
 	leftStatic.setup(box2d.getWorld(), 85, 498, 10, 36);
 	bottomCheck.setup(box2d.getWorld(), 190, 430, 13, 30);
 	hammerSupport.setup(box2d.getWorld(), 112, 341, 12, 12);
-	hammerRest.setup(box2d.getWorld(), 190, 175, 40, 70);
-	hammerRest.setRotation(15);
+	dumperSupport.setup(box2d.getWorld(), 70, 355, 45, 15);
 
 	//Polygons
 	auto basePts = loadPoints("base.dat");
 	base.addVertices(basePts);
-	base.setPhysics(10000.0, 0.3, 0.3);
+	base.setPhysics(10000.0f, 0.3f, 0.3f);
 	base.triangulatePoly();
 	base.create(box2d.getWorld());
 
 	auto keyPts = loadPoints("key.dat");
 	key.addVertices(keyPts);
-	key.setPhysics(1.0, 0.3, 0.3);
+	key.setPhysics(1.0f, 0.3f, 0.3f);
 	key.triangulatePoly();
 	key.create(box2d.getWorld());
 
 	auto jackPts = loadPoints("jack.dat");
 	jack.addVertices(jackPts);
-	jack.setPhysics(1.0, 0.3, 0.3);
+	jack.setPhysics(1.0f, 0.3f, 0.3f);
 	jack.triangulatePoly();
 	jack.create(box2d.getWorld());
 
 	auto hammerButtPts = loadPoints("hammerButt.dat");
 	hammerButt.addVertices(hammerButtPts);
-	hammerButt.setPhysics(1.0, 0.3, 0.3);
+	hammerButt.setPhysics(2.0f, 0.3f, 0.3f);
 	hammerButt.triangulatePoly();
 	hammerButt.create(box2d.getWorld());
 
 	//Rects
-	rect.setPhysics(5.0, 0.5, 0.5);
+	rect.setPhysics(5.0f, 0.5f, 0.5f);
 	rect.setup(box2d.getWorld(), 1000, 300, 50, 50);
 
-	whippen.setPhysics(5.0, 0.5, 0.5);
+	whippen.setPhysics(5.0f, 0.5f, 0.5f);
 	whippen.setup(box2d.getWorld(), 145, 525, 190, 50);
 
 	whippenToJack.setPhysics(1.0, 0.5, 0.5);
@@ -76,6 +75,9 @@ void ofApp::setup() {
 	catcher.setPhysics(1.0, 0.5, 0.5);
 	catcher.setup(box2d.getWorld(), 200, 315, 80, 15);
 	catcher.setRotation(15);
+
+	cucha.setPhysics(1.0, 0.5, 0.5);
+	cucha.setup(box2d.getWorld(), 60, 485, 5, 40);
 
 	//Joints
 	b2RevoluteJointDef leftWDef;
@@ -103,6 +105,12 @@ void ofApp::setup() {
 	b2DistanceJointDef springDef;
 	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
 	spring = (b2DistanceJoint*)box2d.getWorld()->CreateJoint(&springDef);
+
+	b2WeldJointDef whToCuchaDef;
+	whToCuchaDef.collideConnected = false;
+	whToCuchaDef.Initialize(whippen.body, cucha.body, whippen.body->GetWorldCenter());
+	whippenTo2 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToCuchaDef);
+
 }
 
 //--------------------------------------------------------------
@@ -139,6 +147,7 @@ void ofApp::draw() {
 	whippenToJack.draw();
 	hammerButt.draw();
 	catcher.draw();
+	cucha.draw();
 
 	//Static draws
 	base.draw();
@@ -146,7 +155,7 @@ void ofApp::draw() {
 	leftStatic.draw();
 	bottomCheck.draw();
 	hammerSupport.draw();
-	hammerRest.draw();
+	dumperSupport.draw();
 	for (int i = 0; i < polyShapes.size(); i++) {
 		polyShapes[i]->draw();
 
