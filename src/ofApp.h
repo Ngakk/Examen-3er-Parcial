@@ -36,12 +36,15 @@ public:
 	ofxBox2dRect leftStatic;
 	ofxBox2dRect bottomCheck;
 	ofxBox2dRect hammerSupport, hammerRest;
+	ofxBox2dRect dumperSupport;
 
 	//Not static
 	ofxBox2dPolygon key, jack, hammerButt;
-	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody;
+
+	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha;
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt;
-	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt;
+	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2;
+
 	b2DistanceJoint *spring;
 
 	ofImage background;
