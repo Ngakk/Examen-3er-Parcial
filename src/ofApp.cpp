@@ -77,6 +77,10 @@ void ofApp::setup() {
 	catcher.setup(box2d.getWorld(), 200, 315, 80, 15);
 	catcher.setRotation(15);
 
+	hammerBody.setPhysics(1.0, 0.5, 0.5);
+	hammerBody.setup(box2d.getWorld(), 165, 175, 10, 210);
+	hammerBody.setRotation(18);
+
 	//Joints
 	b2RevoluteJointDef leftWDef;
 	leftWDef.Initialize(leftStatic.body, whippen.body, leftStatic.body->GetWorldCenter() + b2Vec2(0, 0.28));
@@ -99,6 +103,11 @@ void ofApp::setup() {
 	chToDef.collideConnected = false;
 	chToDef.Initialize(hammerButt.body, catcher.body, hammerButt.body->GetWorldCenter() + b2Vec2(0, 0));
 	catcherTo = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&chToDef);
+
+	b2WeldJointDef HTBDef;
+	HTBDef.collideConnected = false;
+	HTBDef.Initialize(hammerButt.body, hammerBody.body, hammerButt.body->GetWorldCenter() + b2Vec2(0, 0));
+	hammerToButt = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&HTBDef);
 
 	b2DistanceJointDef springDef;
 	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
@@ -138,6 +147,7 @@ void ofApp::draw() {
 	whippen.draw();
 	whippenToJack.draw();
 	hammerButt.draw();
+	hammerBody.draw();
 	catcher.draw();
 
 	//Static draws

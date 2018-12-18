@@ -39,9 +39,9 @@ public:
 
 	//Not static
 	ofxBox2dPolygon key, jack, hammerButt;
-	ofxBox2dRect rect, whippen, whippenToJack, catcher;
+	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody;
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt;
-	b2WeldJoint *whippenTo, *catcherTo;
+	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt;
 	b2DistanceJoint *spring;
 
 	ofImage background;
