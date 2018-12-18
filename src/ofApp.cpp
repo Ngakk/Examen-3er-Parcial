@@ -150,6 +150,7 @@ void ofApp::draw() {
 		ofDrawCircle(polyShapes[i]->getPosition(), 3);
 	}
 
+	//Debug
 	ofSetColor(255, 0, 0, 200);
 	float seg = 10;
 	float drawseg = 0;
