@@ -35,6 +35,8 @@ void ofApp::setup() {
 	leftStatic.setup(box2d.getWorld(), 85, 498, 10, 36);
 	bottomCheck.setup(box2d.getWorld(), 190, 430, 13, 30);
 	hammerSupport.setup(box2d.getWorld(), 112, 341, 12, 12);
+	hammerRest.setup(box2d.getWorld(), 190, 175, 40, 70);
+	hammerRest.setRotation(15);
 	dumperSupport.setup(box2d.getWorld(), 70, 355, 45, 15);
 
 	//Polygons
@@ -166,6 +168,7 @@ void ofApp::draw() {
 	leftStatic.draw();
 	bottomCheck.draw();
 	hammerSupport.draw();
+	hammerRest.draw();
 	dumperSupport.draw();
 	for (int i = 0; i < polyShapes.size(); i++) {
 		polyShapes[i]->draw();
