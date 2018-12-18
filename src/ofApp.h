@@ -41,9 +41,10 @@ public:
 	//Not static
 	ofxBox2dPolygon key, jack, hammerButt;
 
-	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha;
+	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha, bridleWire;
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt;
-	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2;
+	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2, *whippenTo3;
+	b2RopeJoint *bridleWireToCatcher;
 
 	b2DistanceJoint *spring;
 

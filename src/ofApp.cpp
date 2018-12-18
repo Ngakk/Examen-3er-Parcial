@@ -86,6 +86,10 @@ void ofApp::setup() {
 	cucha.setPhysics(1.0, 0.5, 0.5);
 	cucha.setup(box2d.getWorld(), 60, 485, 5, 40);
 
+	bridleWire.setPhysics(0.5, 0.5, 0.5);
+	bridleWire.setup(box2d.getWorld(), 255, 445, 5, 120);
+	bridleWire.setRotation(20);
+
 	//Joints
 	b2RevoluteJointDef leftWDef;
 	leftWDef.Initialize(leftStatic.body, whippen.body, leftStatic.body->GetWorldCenter() + b2Vec2(0, 0.28));
@@ -118,6 +122,11 @@ void ofApp::setup() {
 	whToCuchaDef.collideConnected = false;
 	whToCuchaDef.Initialize(whippen.body, cucha.body, whippen.body->GetWorldCenter());
 	whippenTo2 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToCuchaDef);
+
+	b2WeldJointDef whToWireDef;
+	whToWireDef.collideConnected = false;
+	whToWireDef.Initialize(whippen.body, bridleWire.body, whippen.body->GetWorldCenter());
+	whippenTo3 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToWireDef);
 
 	b2DistanceJointDef springDef;
 	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
@@ -161,6 +170,7 @@ void ofApp::draw() {
 	hammerBody.draw();
 	catcher.draw();
 	cucha.draw();
+	bridleWire.draw();
 
 	//Static draws
 	base.draw();
