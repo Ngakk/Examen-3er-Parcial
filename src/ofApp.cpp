@@ -35,6 +35,8 @@ void ofApp::setup() {
 	leftStatic.setup(box2d.getWorld(), 85, 498, 10, 36);
 	bottomCheck.setup(box2d.getWorld(), 190, 430, 13, 30);
 	hammerSupport.setup(box2d.getWorld(), 112, 341, 12, 12);
+	hammerRest.setup(box2d.getWorld(), 190, 175, 40, 70);
+	hammerRest.setRotation(15);
 
 	//Polygons
 	auto basePts = loadPoints("base.dat");
@@ -57,7 +59,7 @@ void ofApp::setup() {
 
 	auto hammerButtPts = loadPoints("hammerButt.dat");
 	hammerButt.addVertices(hammerButtPts);
-	hammerButt.setPhysics(2.0, 0.3, 0.3);
+	hammerButt.setPhysics(1.0, 0.3, 0.3);
 	hammerButt.triangulatePoly();
 	hammerButt.create(box2d.getWorld());
 
@@ -144,6 +146,7 @@ void ofApp::draw() {
 	leftStatic.draw();
 	bottomCheck.draw();
 	hammerSupport.draw();
+	hammerRest.draw();
 	for (int i = 0; i < polyShapes.size(); i++) {
 		polyShapes[i]->draw();
 
