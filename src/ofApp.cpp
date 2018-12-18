@@ -112,14 +112,14 @@ void ofApp::setup() {
 	HTBDef.Initialize(hammerButt.body, hammerBody.body, hammerButt.body->GetWorldCenter() + b2Vec2(0, 0));
 	hammerToButt = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&HTBDef);
 
-	b2DistanceJointDef springDef;
-	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
-	spring = (b2DistanceJoint*)box2d.getWorld()->CreateJoint(&springDef);
-
 	b2WeldJointDef whToCuchaDef;
 	whToCuchaDef.collideConnected = false;
 	whToCuchaDef.Initialize(whippen.body, cucha.body, whippen.body->GetWorldCenter());
 	whippenTo2 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToCuchaDef);
+
+	b2DistanceJointDef springDef;
+	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
+	spring = (b2DistanceJoint*)box2d.getWorld()->CreateJoint(&springDef);
 
 }
 
