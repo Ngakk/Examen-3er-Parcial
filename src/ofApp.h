@@ -35,7 +35,7 @@ public:
 	ofxBox2dPolygon base;
 	ofxBox2dRect leftStatic;
 	ofxBox2dRect bottomCheck;
-	ofxBox2dRect hammerSupport;
+	ofxBox2dRect hammerSupport, hammerRest;
 
 	//Not static
 	ofxBox2dPolygon key, jack, hammerButt;
@@ -43,8 +43,6 @@ public:
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt;
 	b2WeldJoint *whippenTo, *catcherTo;
 	b2DistanceJoint *spring;
-
-	b2Vec2 debugPoint;
 
 	ofImage background;
 };
