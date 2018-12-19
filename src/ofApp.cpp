@@ -33,7 +33,7 @@ void ofApp::setup() {
 
 	//Static shapes
 	leftStatic.setup(box2d.getWorld(), 85, 498, 10, 36);
-	bottomCheck.setup(box2d.getWorld(), 190, 430, 13, 30);
+	bottomCheck.setup(box2d.getWorld(), 190, 435, 13, 30);
 	hammerSupport.setup(box2d.getWorld(), 112, 341, 12, 12);
 	hammerRest.setup(box2d.getWorld(), 190, 175, 40, 70);
 	hammerRest.setRotation(15);
@@ -60,7 +60,7 @@ void ofApp::setup() {
 
 	auto hammerButtPts = loadPoints("hammerButt.dat");
 	hammerButt.addVertices(hammerButtPts);
-	hammerButt.setPhysics(2.0f, 0.3f, 0.3f);
+	hammerButt.setPhysics(0.1f, 0.3f, 0.3f);
 	hammerButt.triangulatePoly();
 	hammerButt.create(box2d.getWorld());
 
@@ -79,7 +79,7 @@ void ofApp::setup() {
 	catcher.setRotation(15);
 
 
-	hammerBody.setPhysics(1.0f, 0.5f, 0.5f);
+	hammerBody.setPhysics(0.1f, 0.5f, 0.5f);
 	hammerBody.setup(box2d.getWorld(), 165, 175, 10, 210);
 	hammerBody.setRotation(18);
 
@@ -137,8 +137,18 @@ void ofApp::setup() {
 	whippenTo3 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToWireDef);
 
 	b2DistanceJointDef springDef;
+	springDef.dampingRatio = 0.5;
+	springDef.frequencyHz = 50;
 	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
 	spring = (b2DistanceJoint*)box2d.getWorld()->CreateJoint(&springDef);
+
+	b2RopeJointDef bwToCt;
+	bwToCt.bodyA = bridleWire.body;
+	bwToCt.bodyB = catcher.body;
+	bwToCt.localAnchorB = catcher.body->GetWorldCenter() + b2Vec2(0.6, 0);
+	bwToCt.localAnchorA = bridleWire.body->GetWorldCenter() + b2Vec2(0, -0.6);
+	bwToCt.maxLength = 10;
+	bridleWireToCatcher = (b2RopeJoint*)box2d.getWorld()->CreateJoint(&bwToCt);
 
 }
 
