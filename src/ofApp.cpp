@@ -92,12 +92,12 @@ void ofApp::setup() {
 	bridleWire.setRotation(20);
 
 	dumperBody.setPhysics(1.0f, 0.5f, 0.5f);
-	dumperBody.setup(box2d.getWorld(), 55, 315, 16, 340);
+	dumperBody.setup(box2d.getWorld(), 49, 315, 16, 340);
 
-	damperHeadUp.setPhysics(1.0f, 0.5f, 0.5f);
+	damperHeadUp.setPhysics(10.0f, 0.5f, 0.5f);
 	damperHeadUp.setup(box2d.getWorld(), 6, 130, 20, 40);
 
-	damperHeadDown.setPhysics(1.0f, 0.5f, 0.5f);
+	damperHeadDown.setPhysics(10.0f, 0.5f, 0.5f);
 	damperHeadDown.setup(box2d.getWorld(), 6, 210, 20, 40);
 
 	damperHead.setPhysics(1.0f, 0.5f, 0.5f);
