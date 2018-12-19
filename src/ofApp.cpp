@@ -86,6 +86,11 @@ void ofApp::setup() {
 	cucha.setPhysics(1.0f, 0.5f, 0.5f);
 	cucha.setup(box2d.getWorld(), 60, 485, 5, 40);
 
+
+	bridleWire.setPhysics(0.5, 0.5, 0.5);
+	bridleWire.setup(box2d.getWorld(), 255, 445, 5, 120);
+	bridleWire.setRotation(20);
+
 	dumperBody.setPhysics(1.0f, 0.5f, 0.5f);
 	dumperBody.setup(box2d.getWorld(), 55, 315, 16, 340);
 
@@ -137,7 +142,7 @@ void ofApp::setup() {
 	whToCuchaDef.collideConnected = false;
 	whToCuchaDef.Initialize(whippen.body, cucha.body, whippen.body->GetWorldCenter());
 	whippenTo2 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToCuchaDef);
-
+	
 	b2WeldJointDef damUpToHeadDef;
 	damUpToHeadDef.collideConnected = false;
 	damUpToHeadDef.Initialize(damperHead.body, damperHeadUp.body, damperHead.body->GetWorldCenter());
@@ -157,6 +162,12 @@ void ofApp::setup() {
 	damBodyToJointDef.collideConnected = false;
 	damBodyToJointDef.Initialize(damperJoint.body, dumperBody.body, damperJoint.body->GetWorldCenter());
 	damperTo4 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&damBodyToJointDef);
+
+	b2WeldJointDef whToWireDef;
+	whToWireDef.collideConnected = false;
+	whToWireDef.Initialize(whippen.body, bridleWire.body, whippen.body->GetWorldCenter());
+	whippenTo3 = (b2WeldJoint*)box2d.getWorld()->CreateJoint(&whToWireDef);
+
 
 	b2DistanceJointDef springDef;
 	springDef.Initialize(whippen.body, jack.body, whippen.body->GetWorldCenter(), jack.body->GetWorldCenter());
@@ -189,7 +200,7 @@ void ofApp::draw() {
 	background.draw(-185, 0, background.getWidth() * (ofGetWindowHeight()/background.getHeight()), ofGetWindowHeight());
 
 	//Dynamic draw
-	ofSetColor(10, 20, 230, 150); 
+	ofSetColor(10, 20, 230, 150);
 
 	key.draw();
 	jack.draw();
@@ -200,6 +211,7 @@ void ofApp::draw() {
 	hammerBody.draw();
 	catcher.draw();
 	cucha.draw();
+	bridleWire.draw();
 	dumperBody.draw();
 	damperHeadUp.draw();
 	damperHeadDown.draw();
