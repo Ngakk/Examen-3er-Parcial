@@ -21,6 +21,7 @@ public:
 		box2d.getWorld()->DestroyJoint(damperTo2);
 		box2d.getWorld()->DestroyJoint(damperTo3);
 		box2d.getWorld()->DestroyJoint(damperTo4);
+		box2d.getWorld()->DestroyJoint(whippenTo3);
 	}
 
 	void setup();
@@ -54,7 +55,7 @@ public:
 
 	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha, bridleWire, dumperBody, damperHeadUp, damperHeadDown, damperHead, damperJoint;
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt, *toDumperBody;
-	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2, *damperTo, *damperTo2, *damperTo3, *damperTo4;
+	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2, *damperTo, *damperTo2, *damperTo3, *damperTo4, *whippenTo3;
 	b2RopeJoint *bridleWireToCatcher;
 
 	b2DistanceJoint *spring;
