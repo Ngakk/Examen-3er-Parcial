@@ -10,6 +10,18 @@ public:
 
 	~ofApp() {
 		box2d.getWorld()->DestroyJoint(leftWhippen);
+		box2d.getWorld()->DestroyJoint(toJack);
+		box2d.getWorld()->DestroyJoint(toHammerButt);
+		box2d.getWorld()->DestroyJoint(toDumperBody);
+		box2d.getWorld()->DestroyJoint(whippenTo);
+		box2d.getWorld()->DestroyJoint(catcherTo);
+		box2d.getWorld()->DestroyJoint(hammerToButt);
+		box2d.getWorld()->DestroyJoint(whippenTo2);
+		box2d.getWorld()->DestroyJoint(damperTo);
+		box2d.getWorld()->DestroyJoint(damperTo2);
+		box2d.getWorld()->DestroyJoint(damperTo3);
+		box2d.getWorld()->DestroyJoint(damperTo4);
+		box2d.getWorld()->DestroyJoint(whippenTo3);
 	}
 
 	void setup();
@@ -41,9 +53,9 @@ public:
 	//Not static
 	ofxBox2dPolygon key, jack, hammerButt;
 
-	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha, bridleWire, dumperBody;
+	ofxBox2dRect rect, whippen, whippenToJack, catcher, hammerBody, cucha, bridleWire, dumperBody, damperHeadUp, damperHeadDown, damperHead, damperJoint;
 	b2RevoluteJoint *leftWhippen, *toJack, *toHammerButt, *toDumperBody;
-	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2, *whippenTo3;
+	b2WeldJoint *whippenTo, *catcherTo, *hammerToButt, *whippenTo2, *damperTo, *damperTo2, *damperTo3, *damperTo4, *whippenTo3;
 	b2RopeJoint *bridleWireToCatcher;
 
 	b2DistanceJoint *spring;
